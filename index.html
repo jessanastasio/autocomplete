@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>autocomplete</title>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js"></script>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.4.3.min.js"></script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+
+<body>
+
+
+
+	<div class="container">
+
+	<h1>Search here</h1>
+	<input list="results" id="enter">
+	<datalist id="results"></datalist>
+
+
+	</div>
+<script>
+		
+	
+
+	function autoComplete(input){
+
+		var array = ["jan","mom","jack","alexa","mike","alex","justin"];
+		var flag = true;
+		var newArray = [];
+		var inputLength = input.length;
+
+		for(i = 0; i < array.length; i++){
+
+			for(j = 0; j < input.length; j++){
+
+				if(array[i].charAt(j) != input[j]){
+					flag = false;
+					break;
+				}
+				else{
+					flag=true;
+				}
+
+
+			}
+
+			if(flag){
+				newArray.push(array[i]);
+			}
+
+		}
+
+		var options = '';
+
+	  	for(var i = 0; i < newArray.length; i++){
+	    	options += '<option value="'+newArray[i]+'">';
+	  	}
+
+
+	  	document.getElementById('results').innerHTML = options;
+	
+
+	}
+
+ 	$(document).ready(function(){
+        $("#enter").keyup(function(){
+            autoComplete($(this).val());
+        });
+    })
+
+
+</script>
+</body>
+
+</html>
