@@ -4,19 +4,15 @@
 <meta charset="UTF-8">
 <title>autocomplete</title>
 
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js"></script>
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script src="http://code.jquery.com/jquery-1.4.3.min.js"></script>
-
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 </head>
 
 <body>
-
-
 
 	<div class="container">
 
@@ -24,44 +20,44 @@
 	<input list="results" id="enter">
 	<datalist id="results"></datalist>
 
-
 	</div>
+
 <script>
 		
 	
 
 	function autoComplete(input){
 
-		var array = ["jan","mom","jack","alexa","mike","alex","justin"];
+		var NAMES = ["jan","mom","jack","alexa","mike","alex","justin"];
 		var flag = true;
-		var newArray = [];
 		var inputLength = input.length;
 
-		for(i = 0; i < array.length; i++){
 
-			for(j = 0; j < input.length; j++){
+		// if the input is "", don't bother checking for matches.
+		if (input.length === 0) {
+		  return;
+		}
 
-				if(array[i].charAt(j) != input[j]){
-					flag = false;
-					break;
-				}
-				else{
-					flag=true;
-				}
+		var results = [];
+		for (var i = 0; i < NAMES.length; i++) {
+		  // if we already have 10, stop checking for more
+		  if (results.length >= 10) {
+		    break;
+		  }
 
-
-			}
-
-			if(flag){
-				newArray.push(array[i]);
-			}
-
+		  // grab the first n characters from the name: NAMES[i].slice(0, input.length)
+		  // then convert them all the lowercase: "Pikachu".toLowerCase()
+		  // finally, use === to see if the input is equal to those characters
+		  
+		  if (NAMES[i].slice(0, input.length).toLowerCase() === input.toLowerCase()) {
+		    results.push(NAMES[i])
+		  }
 		}
 
 		var options = '';
 
-	  	for(var i = 0; i < newArray.length; i++){
-	    	options += '<option value="'+newArray[i]+'">';
+	  	for(var i = 0; i < results.length; i++){
+	    	options += '<option value="'+results[i]+'">';
 	  	}
 
 
@@ -74,7 +70,7 @@
         $("#enter").keyup(function(){
             autoComplete($(this).val());
         });
-    })
+    });
 
 
 </script>
