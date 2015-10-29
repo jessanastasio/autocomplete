@@ -25,13 +25,9 @@
 <script>
 		
 	
-
+	var NAMES = ["jan","mom","jack","alexa","mike","alex","justin"];
+	
 	function autoComplete(input){
-
-		var NAMES = ["jan","mom","jack","alexa","mike","alex","justin"];
-		var flag = true;
-		var inputLength = input.length;
-
 
 		// if the input is "", don't bother checking for matches.
 		if (input.length === 0) {
@@ -62,7 +58,6 @@
 
 
 	  	document.getElementById('results').innerHTML = options;
-	
 
 	}
 
